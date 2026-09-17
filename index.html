@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#090b10">
+  <meta name="description" content="Julgue a proposta, vire a carta e descubra quem a defende.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ViraCarta">
+  <title>ViraCarta</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icon.svg">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="ViraCarta">
+        <span class="brand-mark" aria-hidden="true"><span></span></span>
+        <strong>ViraCarta</strong>
+      </a>
+      <button class="icon-button" id="soundButton" type="button" aria-label="Ativar ou desativar sons">♪</button>
+    </header>
+
+    <section id="startScreen" class="screen start-screen active">
+      <div class="start-art" aria-hidden="true">
+        <div class="mini-card red"></div>
+        <div class="mini-card green"></div>
+        <div class="flip-ring">↻</div>
+      </div>
+      <p class="eyebrow">32 cartas · 2 candidatos</p>
+      <h1>Você sabe quem<br>defende cada ideia?</h1>
+      <p class="intro">Primeiro diga se considera a proposta boa ou ruim. Depois tente descobrir de quem ela é.</p>
+      <button class="primary-button" id="startButton" type="button">Começar jogo</button>
+      <button class="text-button install hidden" id="installButton" type="button">Instalar no celular</button>
+      <p class="disclaimer">As frases e atribuições seguem o baralho fornecido. O jogo não indica em quem votar.</p>
+    </section>
+
+    <section id="gameScreen" class="screen game-screen" aria-live="polite">
+      <div class="game-meta">
+        <span id="counter">Carta 1 de 32</span>
+        <span id="score">0 acertos</span>
+      </div>
+      <div class="progress-track" aria-hidden="true"><div id="progressBar"></div></div>
+
+      <div class="card-wrap">
+        <article class="flashcard" id="flashcard">
+          <div class="card-face card-front">
+            <div class="card-tag" id="cardTag">#tema</div>
+            <blockquote id="statement"></blockquote>
+            <span class="card-number" id="cardNumber">01</span>
+          </div>
+          <div class="card-face card-back">
+            <p class="reveal-label">Esta frase é atribuída a</p>
+            <h2 id="politician"></h2>
+            <p id="yourChoice"></p>
+            <span class="card-number" id="backNumber">01</span>
+          </div>
+        </article>
+      </div>
+
+      <div id="judgePanel" class="choice-panel">
+        <p>Na sua opinião, isso é...</p>
+        <div class="choice-grid">
+          <button class="choice-button good" data-judgment="Bom" type="button"><span>↑</span> Bom</button>
+          <button class="choice-button bad" data-judgment="Ruim" type="button"><span>↓</span> Ruim</button>
+        </div>
+      </div>
+
+      <div id="guessPanel" class="choice-panel hidden">
+        <p>Agora: quem defende essa ideia?</p>
+        <div class="choice-grid">
+          <button class="choice-button candidate lula" data-guess="Lula" type="button">Lula</button>
+          <button class="choice-button candidate flavio" data-guess="Flávio Bolsonaro" type="button">Flávio Bolsonaro</button>
+        </div>
+      </div>
+
+      <div id="revealPanel" class="reveal-panel hidden">
+        <div id="resultBadge" class="result-badge"></div>
+        <button class="primary-button" id="nextButton" type="button">Próxima carta</button>
+      </div>
+    </section>
+
+    <section id="endScreen" class="screen end-screen">
+      <div class="trophy" aria-hidden="true">★</div>
+      <p class="eyebrow">Rodada concluída</p>
+      <h1 id="finalTitle">Fim de jogo!</h1>
+      <div class="final-score"><strong id="finalScore">0</strong><span>de 32</span></div>
+      <p id="finalMessage"></p>
+      <div class="summary-grid">
+        <div><strong id="goodCount">0</strong><span>Você marcou “bom”</span></div>
+        <div><strong id="badCount">0</strong><span>Você marcou “ruim”</span></div>
+      </div>
+      <button class="primary-button" id="restartButton" type="button">Jogar novamente</button>
+      <button class="text-button" id="shareButton" type="button">Compartilhar jogo</button>
+    </section>
+  </main>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="./app.js"></script>
+</body>
+</html>
